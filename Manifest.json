@@ -22,7 +22,10 @@
         }
       ]
     },
-    "calendar": {},
-    "drive": {}
+    "calendar": {
+      "eventOpenTrigger": {
+        "runFunction": "https://test-650670410778.europe-west2.run.app/eventOpenTrigger"
+      }
+    }
   }
 }

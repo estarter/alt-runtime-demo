@@ -19,28 +19,24 @@ public class HomeController {
 
     @PostMapping("/home")
     @ResponseBody
-    public String onViewMessage(@RequestBody JsonNode event) {
-//        ObjectMapper response = new ObjectMapper();
-//        ObjectNode responseNode = response.createObjectNode();
-//        responseNode.put("sections", "asdf");
-//        return responseNode;
+    public String home(@RequestBody JsonNode event) {
         return """
                 {
                     action: {
                         navigations: [{
-                            updateCard: {
+                            pushCard: {
                                   "header": {
-                                    "title": "Test card",
+                                    "title": "Sample Addon on Alt runtime",
                                     "imageUrl": "https://developers.google.com/chat/images/quickstart-app-avatar.png",
                                     "imageType": "CIRCLE"
                                   },
                                   "sections": [
                                     {
-                                      "header": "Section Header",
+                                      "header": "How to test?",
                                       "widgets": [
                                         {
                                           "textParagraph": {
-                                            "text": "See <a href=https://developers.google.com/apps-script/add-ons/concepts/widgets#text_formatting>this doc</a> for rich text formatting"
+                                            "text": "Select an event by clicking on Calendar Grid."
                                           }
                                         }
                                       ]
@@ -53,8 +49,66 @@ public class HomeController {
                 """;
     }
 
-    /*
-
-
-     */
+    @PostMapping("/eventOpenTrigger")
+    @ResponseBody
+    public String calendarEventOpenTrigger(@RequestBody JsonNode event) {
+        String calendarId = event.at("/calendar/calendarId").asText();
+        Object eventId = event.at("/calendar/id").asText();
+        Object organizerId = event.at("/calendar/organizer/email").asText();
+        return """
+                {
+                    action: {
+                        navigations: [{
+                            pushCard: {
+                                  "header": {
+                                    "title": "Sample Addon on Alt runtime",
+                                    "imageUrl": "https://developers.google.com/chat/images/quickstart-app-avatar.png",
+                                    "imageType": "CIRCLE"
+                                  },
+                                  "sections": [
+                                    {
+                                      "header": "Selected event",
+                                      "widgets": [
+                                        {
+                                          "textParagraph": {
+                                            "text": "Calendar: %s"
+                                          }
+                                        },
+                                        {
+                                          "textParagraph": {
+                                            "text": "Event id: %s"
+                                          }
+                                        },
+                                        {
+                                          "textParagraph": {
+                                            "text": "Organizer id: %s"
+                                          }
+                                        },
+                                        {
+                                          "textParagraph": {
+                                            "text": "Is organizer copy? %s"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "header": "Debugging data",
+                                      "widgets": [
+                                        {
+                                          "textInput": {
+                                            "name": "Input",
+                                            "label": "Input data",
+                                            "value": "%s",
+                                            "type": MULTIPLE_LINE
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                            }
+                        }]
+                    }
+                }
+                """.formatted(calendarId, eventId, organizerId, calendarId.equals(organizerId), event.toPrettyString().replaceAll("\"", ""));
+    }
 }
