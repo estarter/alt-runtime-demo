@@ -1,0 +1,28 @@
+{
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/calendar",
+    "https://www.googleapis.com/auth/calendar.addons.execute",
+    "https://www.googleapis.com/auth/calendar.addons.current.event.read",
+    "https://www.googleapis.com/auth/calendar.addons.current.event.write",
+    "https://www.googleapis.com/auth/gmail.addons.execute"
+  ],
+  "addOns": {
+    "common": {
+      "name": "My HTTP Add-on",
+      "logoUrl": "https://fonts.gstatic.com/s/i/googlematerialicons/markunread_mailbox/v6/black-24dp/1x/gm_markunread_mailbox_black_24dp.png",
+      "homepageTrigger": {
+        "runFunction": "https://test-650670410778.europe-west2.run.app/home"
+      }
+    },
+    "gmail": {
+      "contextualTriggers": [
+        {
+          "unconditional": {},
+          "onTriggerFunction": "https://test-650670410778.europe-west2.run.app/home"
+        }
+      ]
+    },
+    "calendar": {},
+    "drive": {}
+  }
+}
