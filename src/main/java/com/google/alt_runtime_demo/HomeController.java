@@ -2,9 +2,6 @@ package com.google.alt_runtime_demo;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class HomeController {
 
     @RequestMapping(value = "/test")
-    @ResponseBody
-    public String test(@RequestBody(required = false) String json) {
+    public @ResponseBody String test() {
         return "asdf";
     }
 
@@ -53,8 +49,8 @@ public class HomeController {
     @ResponseBody
     public String calendarEventOpenTrigger(@RequestBody JsonNode event) {
         String calendarId = event.at("/calendar/calendarId").asText();
-        Object eventId = event.at("/calendar/id").asText();
-        Object organizerId = event.at("/calendar/organizer/email").asText();
+        String eventId = event.at("/calendar/id").asText();
+        String organizerId = event.at("/calendar/organizer/email").asText();
         return """
                 {
                     action: {
