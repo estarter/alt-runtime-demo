@@ -26,7 +26,15 @@
       "eventOpenTrigger": {
         "runFunction": "https://test-650670410778.europe-west2.run.app/eventOpenTrigger"
       },
-      "currentEventAccess": "READ_WRITE"
+      "currentEventAccess": "READ_WRITE",
+      "conferenceSolution": [
+        {
+          "id": "conf_sol_123",
+          "logoUrl": "https://lh3.googleusercontent.com/-petXuNEwS5M/ZunZfCnh95I/AAAAAAABX8o/w3TozN51ZM0lmt5qi6LTU8qI9bknElssQCNcBGAsYHQ/s72-c/quickstart-app-avatar.png",
+          "name": "my test conf 123",
+          "onCreateFunction": "createConfFunction"
+        }
+      ]
     }
   }
 }

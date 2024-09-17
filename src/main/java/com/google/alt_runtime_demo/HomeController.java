@@ -85,10 +85,17 @@ public class HomeController {
     @PostMapping("/attachConference")
     @ResponseBody
     public String attachConference(@RequestBody JsonNode event) {
-//        CardItem calendarAction = new CardItem().setProperty("editConferenceDataActionMarkup", );
-        CardItem calendarAction = new CardItem().setProperty("editAttendeesActionMarkup",
-                new CardItem().setProperty("addAttendeeEmails",
-                        new CardItemArray().add(new JsonPrimitive("test@gmail.com"))));
+        CardItem calendarAction = new CardItem().setProperty("editConferenceDataActionMarkup",
+                new CardItem().setProperty("setConferenceData",
+                        new CardItem()
+                                .setProperty("conferenceSolutionId", "conf_sol_123")
+                                .setProperty("entryPoint",
+                                        new CardItemArray()
+                                                .add(new CardItem().setProperty("type", "VIDEO")
+                                                        .setProperty("uri", "http://meet.google.com/asd-qwer-zxc")
+                                                        .setProperty("meetingCode", "asd-qwer-zxc"))
+                                )
+                ));
         return new CardItem().setProperty("renderActions",
                         new CardItem().setProperty("hostAppAction",
                                 new CardItem().setProperty("calendarAction", calendarAction)))
