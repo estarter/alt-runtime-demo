@@ -60,7 +60,12 @@ public class HomeController {
                                                 new CardItemArray().add(
                                                         new CardItem()
                                                                 .setProperty("text", "Attach conference data")
-                                                                .setProperty("onClick", new CardItem().setProperty("action", Map.of("function", "https://test-650670410778.europe-west2.run.app/attachConference"))))))))
+                                                                .setProperty("onClick",
+                                                                        new CardItem().setProperty("action",
+                                                                                Map.of(
+                                                                                        "function", "https://test-650670410778.europe-west2.run.app/attachConference"))
+                                                                )))
+                                )))
                         .add(new CardSection("Debugging data")
                                 .addWidget(
                                         new CardItem().setProperty("textInput",
@@ -80,11 +85,10 @@ public class HomeController {
     @PostMapping("/attachConference")
     @ResponseBody
     public String attachConference(@RequestBody JsonNode event) {
-        return """
-                {
-                    "actionResponse": []
-                }
-                """;
+        return new CardItem().setProperty("renderActions",
+                        new CardItem().setProperty("action",
+                                new CardItem().setProperty("notification", Map.of("text", ""))))
+                .render();
     }
 
 

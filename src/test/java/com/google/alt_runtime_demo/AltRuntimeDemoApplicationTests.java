@@ -141,4 +141,12 @@ class AltRuntimeDemoApplicationTests {
                         }
                         """));
     }
+
+    @Test
+    void attachConference() throws Exception {
+        mockMvc.perform(post("/attachConference").contentType(APPLICATION_JSON).content("{}"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json("{}"));
+    }
 }
