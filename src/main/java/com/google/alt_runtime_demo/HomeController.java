@@ -42,6 +42,7 @@ public class HomeController {
         String calendarId = event.at("/calendar/calendarId").asText();
         String eventId = event.at("/calendar/id").asText();
         String organizerId = event.at("/calendar/organizer/email").asText();
+        boolean canSetConfData = event.at("/calendar/capabilities/canSetConferenceData").asBoolean();
 
         CardItem pushCard = new CardItem()
                 .setProperty("header",
@@ -60,6 +61,7 @@ public class HomeController {
                                                 new CardItemArray().add(
                                                         new CardItem()
                                                                 .setProperty("text", "Attach conference data")
+                                                                .setProperty("disabled", String.valueOf(!canSetConfData))
                                                                 .setProperty("onClick",
                                                                         new CardItem().setProperty("action",
                                                                                 Map.of(
