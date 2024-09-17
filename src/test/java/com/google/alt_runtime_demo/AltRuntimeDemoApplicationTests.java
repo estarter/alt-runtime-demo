@@ -74,75 +74,83 @@ class AltRuntimeDemoApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         {
-                           "action": {
-                             "navigations": [
-                               {
-                                 "pushCard": {
-                                   "header": {
-                                     "imageUrl": "https://developers.google.com/chat/images/quickstart-app-avatar.png",
-                                     "title": "Sample Addon on Alt runtime",
-                                     "imageType": "CIRCLE"
-                                   },
-                                   "sections": [
-                                     {
-                                       "header": "Selected event",
-                                       "widgets": [
-                                         {
-                                           "textParagraph": {
-                                             "text": "Calendar: test@google.com"
-                                           }
-                                         },
-                                         {
-                                           "textParagraph": {
-                                             "text": "Event id: asdfqwersa"
-                                           }
-                                         },
-                                         {
-                                           "textParagraph": {
-                                             "text": "Organizer id: test@google.com"
-                                           }
-                                         }
-                                       ]
-                                     },
-                                     {
-                                       "header": "Event manipulations",
-                                       "widgets": [
-                                         {
-                                           "buttonList": {
-                                             "buttons": [
-                                               {
-                                                 "text": "Attach conference data",
-                                                 "disabled": "false",
-                                                 "onClick": {
-                                                   "action": {
-                                                     "function": "https://test-650670410778.europe-west2.run.app/attachConference"
-                                                   }
-                                                 }
-                                               }
-                                             ]
-                                           }
-                                         }
-                                       ]
-                                     },
-                                     {
-                                       "header": "Debugging data",
-                                       "widgets": [
-                                         {
-                                           "textInput": {
-                                             "value": "{\\n  \\"calendar\\" : {\\n    \\"calendarId\\" : \\"test@google.com\\",\\n    \\"id\\" : \\"asdfqwersa\\",\\n    \\"organizer\\" : {\\n      \\"email\\" : \\"test@google.com\\"\\n    },\\n    \\"capabilities\\" : {\\n      \\"canSetConferenceData\\" : true\\n    }\\n  }\\n}",
-                                             "label": "Input data",
-                                             "name": "Input",
-                                             "type": "MULTIPLE_LINE"
-                                           }
-                                         }
-                                       ]
-                                     }
-                                   ]
-                                 }
-                               }
-                             ]
-                           }
-                         }
+                            "action": {
+                              "navigations": [
+                                {
+                                  "pushCard": {
+                                    "header": {
+                                      "imageType": "CIRCLE",
+                                      "imageUrl": "https://developers.google.com/chat/images/quickstart-app-avatar.png",
+                                      "title": "Sample Addon on Alt runtime"
+                                    },
+                                    "sections": [
+                                      {
+                                        "header": "Selected event",
+                                        "widgets": [
+                                          {
+                                            "textParagraph": {
+                                              "text": "Calendar: test@google.com"
+                                            }
+                                          },
+                                          {
+                                            "textParagraph": {
+                                              "text": "Event id: asdfqwersa"
+                                            }
+                                          },
+                                          {
+                                            "textParagraph": {
+                                              "text": "Organizer id: test@google.com"
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "header": "Event manipulations",
+                                        "widgets": [
+                                          {
+                                            "buttonList": {
+                                              "buttons": [
+                                                {
+                                                  "text": "Attach conference data",
+                                                  "disabled": "false",
+                                                  "onClick": {
+                                                    "action": {
+                                                      "function": "https://test-650670410778.europe-west2.run.app/attachConference"
+                                                    }
+                                                  }
+                                                },
+                                                {
+                                                  "text": "Invoke APIv3",
+                                                  "onClick": {
+                                                    "action": {
+                                                      "function": "https://test-650670410778.europe-west2.run.app/invokeApiV3"
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "header": "Debugging data",
+                                        "widgets": [
+                                          {
+                                            "textInput": {
+                                              "label": "Input data",
+                                              "name": "Input",
+                                              "type": "MULTIPLE_LINE",
+                                              "value": "{\\n  \\"calendar\\" : {\\n    \\"calendarId\\" : \\"test@google.com\\",\\n    \\"id\\" : \\"asdfqwersa\\",\\n    \\"organizer\\" : {\\n      \\"email\\" : \\"test@google.com\\"\\n    },\\n    \\"capabilities\\" : {\\n      \\"canSetConferenceData\\" : true\\n    }\\n  }\\n}"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
                         """));
     }
 

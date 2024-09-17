@@ -30,3 +30,5 @@ GWM SDK: https://console.cloud.google.com/apis/api/appsmarket-component.googleap
 Card builder: https://addons.gsuite.google.com/uikit/builder
 
 Sample github project: https://github.com/googleworkspace/add-ons-samples/blob/ece111df69770694e83a6e893982d24e7a3fd6cd/java/3p-resources/src/main/java/Create3pResources.java 
+
+Log viewer: https://console.cloud.google.com/logs/query;cursorTimestamp=2024-09-17T19:56:15.927113Z;duration=PT1H?referrer=search&hl=en&project=test-addon-on-alt-runtime

@@ -1,13 +1,23 @@
 package com.google.alt_runtime_demo;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.services.calendar.Calendar;
+import com.google.api.services.calendar.model.CalendarList;
+import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.gson.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import com.google.api.client.auth.oauth2.BearerToken;
+import com.google.api.client.auth.oauth2.Credential;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
@@ -58,15 +68,23 @@ public class HomeController {
                         .add(new CardSection("Event manipulations")
                                 .addWidget(new CardItem().setProperty("buttonList",
                                         new CardItem().setProperty("buttons",
-                                                new CardItemArray().add(
-                                                        new CardItem()
+                                                new CardItemArray()
+                                                        .add(new CardItem()
                                                                 .setProperty("text", "Attach conference data")
                                                                 .setProperty("disabled", String.valueOf(!canSetConfData))
                                                                 .setProperty("onClick",
                                                                         new CardItem().setProperty("action",
                                                                                 Map.of(
-                                                                                        "function", "https://test-650670410778.europe-west2.run.app/attachConference"))
-                                                                )))
+                                                                                        "function", "https://test-650670410778.europe-west2.run.app/attachConference")))
+                                                        )
+                                                        .add(new CardItem()
+                                                                .setProperty("text", "Invoke APIv3")
+                                                                .setProperty("onClick",
+                                                                        new CardItem().setProperty("action",
+                                                                                Map.of(
+                                                                                        "function", "https://test-650670410778.europe-west2.run.app/invokeApiV3")))
+                                                        )
+                                        )
                                 )))
                         .add(new CardSection("Debugging data")
                                 .addWidget(
@@ -102,6 +120,44 @@ public class HomeController {
                         new CardItem().setProperty("hostAppAction",
                                 new CardItem().setProperty("calendarAction", calendarAction)))
                 .render();
+    }
+
+    @PostMapping("/invokeApiV3")
+    @ResponseBody
+    public String invokeApiV3(@RequestBody JsonNode event) {
+        String accessToken = event.at("/authorizationEventObject/userOAuthToken").asText();
+        String queryResult = queryApiV3(accessToken);
+
+        return new CardItem().setProperty("renderActions",
+                        new CardItem().setProperty("action",
+                                new CardItem().setProperty("notification",
+                                        new CardItem().setProperty("text", queryResult))))
+                .render();
+    }
+
+    private static String queryApiV3(String accessToken) {
+        System.out.println("Use access token: " + accessToken);
+        if (accessToken == null || accessToken.isBlank()) {
+            return "access token is missing";
+        }
+        Credential credential = new Credential(BearerToken.authorizationHeaderAccessMethod());
+        credential.setAccessToken(accessToken);
+        try {
+            Calendar calendarClient =
+                    new Calendar.Builder(
+                            GoogleNetHttpTransport.newTrustedTransport(),
+                            JacksonFactory.getDefaultInstance(),
+                            credential
+                    ).build();
+            CalendarList calendarList = calendarClient.calendarList().list().execute();
+            String calendarNames = calendarList.getItems().stream()
+                    .map(CalendarListEntry::getSummary)
+                    .collect(Collectors.joining(", "));
+            return "Calendars: " + calendarNames;
+        } catch (GeneralSecurityException | IOException e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
     }
 
 
