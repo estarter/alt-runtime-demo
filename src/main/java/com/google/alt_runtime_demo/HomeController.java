@@ -83,10 +83,24 @@ public class HomeController {
                                           "textParagraph": {
                                             "text": "Organizer id: %s"
                                           }
-                                        },
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "header": "Event manipulations",
+                                      "widgets": [
                                         {
-                                          "textParagraph": {
-                                            "text": "Is organizer copy? %s"
+                                          "buttonList": {
+                                            "buttons": [
+                                              {
+                                                "text": "Attach conference data",
+                                                "onClick": {
+                                                    "action": {
+                                                        "function": "https://test-650670410778.europe-west2.run.app/attachConference"
+                                                    }
+                                                }
+                                              }
+                                            ]
                                           }
                                         }
                                       ]
@@ -110,5 +124,15 @@ public class HomeController {
                     }
                 }
                 """.formatted(calendarId, eventId, organizerId, calendarId.equals(organizerId), event.toPrettyString().replaceAll("\"", ""));
+    }
+
+    @PostMapping("/attachConference")
+    @ResponseBody
+    public String attachConference(@RequestBody JsonNode event) {
+        return """
+                {
+                    "actionResponse": []
+                }
+                """;
     }
 }
