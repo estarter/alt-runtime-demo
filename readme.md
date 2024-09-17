@@ -28,3 +28,5 @@ GWAO on alt runtime: https://developers.google.com/workspace/add-ons/guides/alte
 GWM SDK: https://console.cloud.google.com/apis/api/appsmarket-component.googleapis.com/credentials?project=test-addon-on-alt-runtime&hl=en
 
 Card builder: https://addons.gsuite.google.com/uikit/builder
+
+Sample github project: https://github.com/googleworkspace/add-ons-samples/blob/ece111df69770694e83a6e893982d24e7a3fd6cd/java/3p-resources/src/main/java/Create3pResources.java 

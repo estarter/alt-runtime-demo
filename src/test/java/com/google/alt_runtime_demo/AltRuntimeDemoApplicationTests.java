@@ -29,7 +29,7 @@ class AltRuntimeDemoApplicationTests {
         mockMvc.perform(post("/home").contentType(APPLICATION_JSON).content("{}"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string("""
+                .andExpect(content().json("""
                         {
                             action: {
                                 navigations: [{
@@ -61,18 +61,17 @@ class AltRuntimeDemoApplicationTests {
     @Test
     void calendarEventOpenTrigger() throws Exception {
         mockMvc.perform(post("/eventOpenTrigger").contentType(APPLICATION_JSON).content("""
-                {
-                    "calendar": {
-                        "calendarId": "test@google.com",
-                        "id": "asdfqwersa",
-                        "organizer": {"email": "test@google.com"}
-                    }
-                }
-                
-                """))
+                        {
+                            "calendar": {
+                                "calendarId": "test@google.com",
+                                "id": "asdfqwersa",
+                                "organizer": {"email": "test@google.com"}
+                            }
+                        }
+                        """))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string("""
+                .andExpect(content().json("""
                         {
                             action: {
                                 navigations: [{
