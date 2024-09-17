@@ -128,7 +128,7 @@ class AltRuntimeDemoApplicationTests {
                                                   "textInput": {
                                                     "name": "Input",
                                                     "label": "Input data",
-                                                    "value": "true",
+                                                    "value": "{\\n  \\"calendar\\" : {\\n    \\"calendarId\\" : \\"test@google.com\\",\\n    \\"id\\" : \\"asdfqwersa\\",\\n    \\"organizer\\" : {\\n      \\"email\\" : \\"test@google.com\\"\\n    }\\n  }\\n}",
                                                     "type": MULTIPLE_LINE
                                                   }
                                                 }

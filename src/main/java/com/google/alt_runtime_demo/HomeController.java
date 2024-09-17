@@ -66,10 +66,11 @@ public class HomeController {
                                         new CardItem().setProperty("textInput",
                                                 Map.of("name", "Input",
                                                         "label", "Input data",
-                                                        "value", "true",
+                                                        "value", event.toPrettyString(),
                                                         "type", "MULTIPLE_LINE"
                                                 ))))
                 );
+
         return new CardItem().setProperty("action",
                 new CardItem().setSingleElementArrayProperty("navigations",
                         new CardItem().setProperty("pushCard", pushCard)
