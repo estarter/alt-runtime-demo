@@ -85,9 +85,13 @@ public class HomeController {
     @PostMapping("/attachConference")
     @ResponseBody
     public String attachConference(@RequestBody JsonNode event) {
+//        CardItem calendarAction = new CardItem().setProperty("editConferenceDataActionMarkup", );
+        CardItem calendarAction = new CardItem().setProperty("editAttendeesActionMarkup",
+                new CardItem().setProperty("addAttendeeEmails",
+                        new CardItemArray().add(new JsonPrimitive("test@gmail.com"))));
         return new CardItem().setProperty("renderActions",
-                        new CardItem().setProperty("action",
-                                new CardItem().setProperty("notification", Map.of("text", ""))))
+                        new CardItem().setProperty("hostAppAction",
+                                new CardItem().setProperty("calendarAction", calendarAction)))
                 .render();
     }
 
@@ -142,7 +146,11 @@ public class HomeController {
         }
 
         public CardItemArray add(CardElementI cardElementI) {
-            jsonObject.add(cardElementI.getElement());
+            return add(cardElementI.getElement());
+        }
+
+        public CardItemArray add(JsonElement jsonElement) {
+            jsonObject.add(jsonElement);
             return this;
         }
     }
