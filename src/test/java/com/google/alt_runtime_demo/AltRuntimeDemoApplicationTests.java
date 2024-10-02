@@ -120,7 +120,7 @@ class AltRuntimeDemoApplicationTests {
                                                   }
                                                 },
                                                 {
-                                                  "text": "Invoke APIv3",
+                                                  "text": "Emulate calendar notification",
                                                   "onClick": {
                                                     "action": {
                                                       "function": "https://test-650670410778.europe-west2.run.app/invokeApiV3"
@@ -133,7 +133,7 @@ class AltRuntimeDemoApplicationTests {
                                         ]
                                       },
                                       {
-                                        "header": "Debugging data",
+                                        "header": "Invocation raw data",
                                         "widgets": [
                                           {
                                             "textInput": {

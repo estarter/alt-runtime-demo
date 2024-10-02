@@ -78,7 +78,7 @@ public class HomeController {
                                                                                         "function", "https://test-650670410778.europe-west2.run.app/attachConference")))
                                                         )
                                                         .add(new CardItem()
-                                                                .setProperty("text", "Invoke APIv3")
+                                                                .setProperty("text", "Emulate calendar notification")
                                                                 .setProperty("onClick",
                                                                         new CardItem().setProperty("action",
                                                                                 Map.of(
@@ -86,7 +86,7 @@ public class HomeController {
                                                         )
                                         )
                                 )))
-                        .add(new CardSection("Debugging data")
+                        .add(new CardSection("Invocation raw data")
                                 .addWidget(
                                         new CardItem().setProperty("textInput",
                                                 Map.of("name", "Input",
